@@ -7,7 +7,11 @@ const data = ['Tema 1', 'Tema 2', 'Tema 3', 'Tema 4']
 const selectedIndex = ref(0)
 
 function showInfo(i){
-    selectedIndex.value = i
+    if(i == selectedIndex.value){
+        selectedIndex.value = -1
+    }else{
+        selectedIndex.value = i
+    }
 }
 
 </script>
@@ -17,10 +21,12 @@ function showInfo(i){
         <div
             v-for="(theme, i) in data"
             :key="i"
+            class="mb-1"
         > 
             <h1 
                 @click="showInfo(i)"
                 class="select-none bg-blue-400 text-white px-1 flex justify-between hover:cursor-pointer"
+                :class = "{'bg-blue-600' : selectedIndex == i} "
             >
                 {{ theme }}
                 <span>{{ selectedIndex == i ? '-' : '+' }}</span>
